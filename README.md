@@ -26,6 +26,8 @@ Laser for entertain your cat with
 
 Connected to Blynk app and remotely controllable.
 
+https://medium.com/@monsieur_riz/how-i-hacked-my-cats-with-an-arduino-11d70d3ea6fe
+
 ------------------------------------------------------------------------------------------------------------------
 
 Rename `secrets.h.example` to `secrets.h` and complete it.
