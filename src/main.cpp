@@ -18,9 +18,22 @@ int maxFreeze = 2500;
 Servo servoX;
 Servo servoY;
 
+void servosAttach() {
+  servoX.attach(D5);
+  servoY.attach(D6);
+}
+
+void servosDetach() {
+  servoX.detach();
+  servoY.detach();
+}
+
+
 
 bool runLoop = false;
 BLYNK_WRITE(V0) {
+  servosAttach();
+
   if (param.asInt() == 1) {
     servoX.write(90);
     servoY.write(5);
@@ -33,11 +46,11 @@ BLYNK_WRITE(V0) {
     runLoop = false;
   }
 
+  servosDetach();
 }
 
-
 void setup() {
-  pinMode (D7, OUTPUT);
+  pinMode(D7, OUTPUT);
 
   Serial.begin(9600);
   Serial.println("Starting");
@@ -54,8 +67,7 @@ void loop() {
     return;
   }
 
-  servoX.attach(D5);
-  servoY.attach(D6);
+  servosAttach();
 
   int finalX = random(30, 150);
 
@@ -89,8 +101,7 @@ void loop() {
   }
   oldY = finalY;
 
-  servoX.detach();
-  servoY.detach();
+  servosDetach();
 
   int randomDelay = random(minFreeze, maxFreeze);
   delay(randomDelay);
