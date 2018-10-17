@@ -20,7 +20,7 @@ Servo servoY;
 
 
 bool runLoop = false;
-BLYNK_WRITE(V0) {   
+BLYNK_WRITE(V0) {
   if (param.asInt() == 1) {
     servoX.write(90);
     servoY.write(5);
@@ -32,17 +32,13 @@ BLYNK_WRITE(V0) {
     servoY.write(5);
     runLoop = false;
   }
-  
+
 }
 
 
 void setup() {
-  servoX.attach(D5);
-  servoY.attach(D6);
-
- 
   pinMode (D7, OUTPUT);
-  
+
   Serial.begin(9600);
   Serial.println("Starting");
   Blynk.begin(auth, ssid, pass);
@@ -52,13 +48,15 @@ int oldX;
 int oldY;
 
 void loop() {
-
   Blynk.run();
 
   if (runLoop == false) {
     return;
   }
-  
+
+  servoX.attach(D5);
+  servoY.attach(D6);
+
   int finalX = random(30, 150);
 
   if (finalX >= oldX) {
@@ -91,8 +89,9 @@ void loop() {
   }
   oldY = finalY;
 
+  servoX.detach();
+  servoY.detach();
+
   int randomDelay = random(minFreeze, maxFreeze);
   delay(randomDelay);
- 
-  
 }
