@@ -18,16 +18,21 @@ int maxFreeze = 2500;
 Servo servoX;
 Servo servoY;
 
-
 bool runLoop = false;
+
+WidgetLED led1(V1);
+
 BLYNK_WRITE(V0) {   
+
   if (param.asInt() == 1) {
     servoX.write(90);
     servoY.write(5);
     digitalWrite (D7, HIGH);
+    led1.on();
     runLoop = true;
   } else {
     digitalWrite (D7, LOW);
+    led1.off();
     servoX.write(90);
     servoY.write(5);
     runLoop = false;
