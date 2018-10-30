@@ -14,6 +14,7 @@ char pass[] = PASSWORD;
 int minFreeze = 200;
 int maxFreeze = 2500;
 
+WidgetLED led1(V1);
 
 Servo servoX;
 Servo servoY;
@@ -54,7 +55,7 @@ BLYNK_WRITE(V0) {
 void setup() {
   pinMode(D7, OUTPUT);
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("Starting");
   Blynk.begin(auth, ssid, pass);
 }
